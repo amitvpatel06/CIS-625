@@ -306,8 +306,8 @@ if  __name__ == "__main__":
 		env = Grid(size, control, 100)
 		filename_CM = 'CM-episodes_{}'.format(size)
 		filename_C = 'C-episodes_{}'.format(size)
-		C_sim(params, env, 100000, filename_C)
-		CM_sim(params, env, 100000, filename_CM)
+		C_sim(params, env, 1000000, filename_C)
+		CM_sim(params, env, 1000000, filename_CM)
 		tf.reset_default_graph()
 
 	
