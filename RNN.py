@@ -302,7 +302,7 @@ if  __name__ == "__main__":
 	}
 	for i in range(10):
 		size = np.power(2, i)
-		control = size / 1000
+		control = size / 10
 		env = Grid(size, control, 100)
 		filename_CM = 'CM-episodes_{}'.format(size)
 		filename_C = 'C-episodes_{}'.format(size)
