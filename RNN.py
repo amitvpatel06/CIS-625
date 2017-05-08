@@ -207,7 +207,7 @@ def CM_sim(params, environment, steps, filename):
 
 	gamma = .99
 	e = 1
-	sleep_freq = 15
+	sleep_freq = 100
 
 	M = M_RNN(params)
 	C = C_NN(params)
@@ -297,12 +297,12 @@ if  __name__ == "__main__":
 		'n': 1,
 		'o': 7,
 		'h_c': 4,
-		'window': 10,
+		'window': 50,
 		'hidden': 5
 	}
 	for i in range(10):
 		size = np.power(2, i)
-		control = size / 100
+		control = size / 1000
 		env = Grid(size, control, 100)
 		filename_CM = 'CM-episodes_{}'.format(size)
 		filename_C = 'C-episodes_{}'.format(size)
