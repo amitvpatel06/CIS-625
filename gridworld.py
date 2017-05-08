@@ -44,10 +44,10 @@ class Grid(object):
 			self.acceleration = np.zeros(3)
 		# Perform the move
 		self.move()
-		print "State: " 		
-		print self.state()
-		print "Reward: " 
-		print self.reward()
+		#print "State: " 		
+		#print self.state()
+		#print "Reward: " 
+		#print self.reward()
 		return
 
 	# State Function
@@ -70,6 +70,7 @@ class Grid(object):
 				self.velocity[i] = 0
 			elif tempPos < 0:
 				tempPos = 0
+				self.velocity[i] = 0
 			self.position[i] = tempPos
 		return
 
