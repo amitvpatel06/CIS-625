@@ -195,7 +195,7 @@ def C_sim(params, environment, steps, filename):
 				losses = []
 				rewards = []
 
-	average_file = open(filename, 'wb')
+	average_file = open(filename +'.csv', 'wb')
 	# write trades executed
 	w = csv.writer(average_file)
 	stats.insert(0, ['Timestep', 'Average Reward', 'C Loss', 'M Loss'])
@@ -284,7 +284,7 @@ def CM_sim(params, environment, steps, filename):
 				losses = []
 				rewards = []
 
-	average_file = open(filename, 'wb')
+	average_file = open(filename +'.csv', 'wb')	
 	# write trades executed
 	w = csv.writer(average_file)
 	stats.insert(0, ['Timestep', 'Average Reward', 'C Loss', 'M Loss'])
