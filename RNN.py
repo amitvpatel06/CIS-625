@@ -151,7 +151,6 @@ def C_sim(params, environment, steps, filename):
 		m_losses = []
 		losses = []
 		for ts in range(1, steps + 1):
-			print ts
 			e = 100 / np.sqrt(ts)
 			# given last state, action, reward, predict next action
 			C_in = np.concatenate([curr_state, curr_reward]).reshape(1, params['m']+ params['n'])
@@ -189,6 +188,7 @@ def C_sim(params, environment, steps, filename):
 			#print 'loss'
 			#print loss
 			if environment.move_c % environment.reset == 0:
+				print ts
 				r = np.mean(rewards)
 				l = np.mean(losses)
 				stats.append([ts, r, l, mloss])
@@ -225,7 +225,6 @@ def CM_sim(params, environment, steps, filename):
 		curr_action = np.array([random.randint(0, params['o'])])	
 		M.add_to_history(curr_state, curr_reward, curr_action)
 		for ts in range(1, steps + 1):
-			print ts
 			e = 100 / np.sqrt(ts)
 			# given last state, action, reward, predict next action
 			M_in, _ = M.compile_output_and_input()
@@ -269,7 +268,8 @@ def CM_sim(params, environment, steps, filename):
 			#print targ_Q
 			#print 'loss'
 			#print loss
-			if ts % sleep_freq == 0: 
+			if ts % sleep_freq == 0:
+			 
 				x, y = M.compile_output_and_input()
 				updateM, mloss = sess.run((M.updateWeights, M.loss), feed_dict={
 																		M.input_place_holder: x,
@@ -277,6 +277,7 @@ def CM_sim(params, environment, steps, filename):
 																	})
 				print 'MLOSS'
 			if environment.move_c % environment.reset == 0:
+				print ts
 				r = np.mean(rewards)
 				l = np.mean(losses)
 				stats.append([ts, r, l, mloss])
