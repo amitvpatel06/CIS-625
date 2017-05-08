@@ -303,9 +303,9 @@ if  __name__ == "__main__":
 	for i in range(10):
 		size = np.power(2, i)
 		control = size / 10
-		env = Grid(size, control, 100)
-		filename_CM = 'CM-episodes_{}'.format(size)
-		filename_C = 'C-episodes_{}'.format(size)
+		env = Grid(size, control, 10)
+		filename_CM = 'CM10-episodes_{}'.format(size)
+		filename_C = 'C10-episodes_{}'.format(size)
 		C_sim(params, env, 1000000, filename_C)
 		CM_sim(params, env, 1000000, filename_CM)
 		tf.reset_default_graph()
