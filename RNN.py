@@ -133,7 +133,7 @@ class M_RNN:
 
 def C_sim(params, environment, steps, filename):
 	gamma = .99
-	e = 1
+	e = 0.1
 	C = C_single(params)
 	init = tf.global_variables_initializer()
 	stats = []
@@ -151,7 +151,6 @@ def C_sim(params, environment, steps, filename):
 		m_losses = []
 		losses = []
 		for ts in range(1, steps + 1):
-			e = 100 / np.sqrt(ts)
 			# given last state, action, reward, predict next action
 			C_in = np.concatenate([curr_state, curr_reward]).reshape(1, params['m']+ params['n'])
 			predicted_action, Q_est = sess.run((C.max_action, C.predictions), feed_dict={C.input_place_holder: C_in})
@@ -206,7 +205,7 @@ def C_sim(params, environment, steps, filename):
 def CM_sim(params, environment, steps, filename):
 
 	gamma = .99
-	e = 1
+	e = 0.1
 	sleep_freq = 100
 
 	M = M_RNN(params)
@@ -225,7 +224,6 @@ def CM_sim(params, environment, steps, filename):
 		curr_action = np.array([random.randint(0, params['o'])])	
 		M.add_to_history(curr_state, curr_reward, curr_action)
 		for ts in range(1, steps + 1):
-			e = 100 / np.sqrt(ts)
 			# given last state, action, reward, predict next action
 			M_in, _ = M.compile_output_and_input()
 			M_hidden, M_predictions = sess.run((M.final_rnn_state, M.predictions), feed_dict={M.input_place_holder: M_in}) 
@@ -302,12 +300,12 @@ if  __name__ == "__main__":
 	}
 	for i in range(10):
 		size = np.power(2, i)
-		control = size / 10
+		control = 0.1
 		env = Grid(size, control, 10)
 		filename_CM = 'CM10-episodes_{}'.format(size)
 		filename_C = 'C10-episodes_{}'.format(size)
-		C_sim(params, env, 1000000, filename_C)
-		CM_sim(params, env, 1000000, filename_CM)
+		C_sim(params, env, 100000, filename_C)
+		CM_sim(params, env, 100000, filename_CM)
 		tf.reset_default_graph()
 
 	
